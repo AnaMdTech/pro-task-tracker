@@ -1,53 +1,67 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * SENIOR TEMPLATE: Single Source of Truth Design Tokens
+ * Mirror of global.css @theme block for imperative JavaScript/React Native code.
  */
 
-import { Platform } from 'react-native';
+export const colors = {
+    background: "#090d16",
+    foreground: "#f8fafc",
+    card: "#111827",
+    cardForeground: "#f8fafc",
+    muted: "#1e293b",
+    mutedForeground: "#94a3b8",
+    primary: "#6366f1",
+    primaryForeground: "#ffffff",
+    accent: "#10b981",
+    accentForeground: "#047857",
+    border: "#1e293b",
+    success: "#10b981",
+    destructive: "#ef4444",
+} as const;
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+export const spacing = {
+    0: 0,
+    1: 4,
+    2: 8,
+    3: 12,
+    4: 16,
+    5: 20,
+    6: 24,
+    8: 32,
+    10: 40,
+    12: 48,
+    16: 64,
+    20: 80,
+    24: 96,
+} as const;
 
-export const Colors = {
-  light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
-  },
-  dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
-  },
-};
+export const radius = {
+    sm: 8,
+    md: 12,
+    lg: 16,
+    xl: 24,
+    full: 9999,
+} as const;
 
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
-  },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
-  },
-  web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
-    rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
-    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
-  },
-});
+export const components = {
+    tabBar: {
+        height: 72,
+        horizontalInset: spacing[5],
+        radius: radius.xl,
+        iconFrame: spacing[12],
+    },
+    card: {
+        padding: spacing[4],
+        radius: radius.lg,
+    },
+} as const;
+
+export const theme = {
+    colors,
+    spacing,
+    radius,
+    components,
+} as const;
+
+export type ThemeColors = keyof typeof colors;
+export type ThemeSpacing = keyof typeof spacing;

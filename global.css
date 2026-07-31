@@ -1,0 +1,63 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+
+@theme {
+    /* ==========================================
+       1. FUNCTIONAL / SEMANTIC COLORS
+    ========================================== */
+    /* Screen backgrounds and default text */
+    --color-background: #090d16;
+    --color-foreground: #f8fafc;
+
+    /* Elevated surfaces (Cards, Modals, Sheets) */
+    --color-card: #111827;
+    --color-card-foreground: #f8fafc;
+
+    /* Subtle background fills & secondary text */
+    --color-muted: #1e293b;
+    --color-muted-foreground: #94a3b8;
+
+    /* Brand core actions (Buttons, Active states) */
+    --color-primary: #6366f1;
+    --color-primary-foreground: #ffffff;
+
+    /* Highlights, badges, and progress indicators */
+    --color-accent: #10b981;
+    --color-accent-foreground: #047857;
+
+    /* Structural dividers and input outlines */
+    --color-border: #1e293b;
+
+    /* Status feedbacks */
+    --color-success: #10b981;
+    --color-destructive: #ef4444;
+
+    /* ==========================================
+       2. SPATIAL 4pt / 8pt GRID SYSTEM
+    ========================================== */
+    --spacing-0: 0px;
+    --spacing-1: 4px;
+    --spacing-2: 8px;
+    --spacing-3: 12px;
+    --spacing-4: 16px;
+    --spacing-5: 20px;
+    --spacing-6: 24px;
+    --spacing-8: 32px;
+    --spacing-10: 40px;
+    --spacing-12: 48px;
+    --spacing-16: 64px;
+    --spacing-20: 80px;
+    --spacing-24: 96px;
+
+    /* ==========================================
+       3. SYSTEM BORDER RADII
+    ========================================== */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+}
