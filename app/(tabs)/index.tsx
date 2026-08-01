@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
+import {
+    SafeAreaView as RNSafeAreaView,
+    useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { styled } from "nativewind";
 
 import { SprintProgress } from "@/components/ui/SprintProgress";
@@ -8,12 +11,21 @@ import { TaskCard } from "@/components/ui/TaskCard";
 import { CreateTaskModal } from "@/components/forms/CreateTaskModal";
 import { useTaskStore } from "@/store/useTaskStore";
 import { Task, TaskPriority } from "@/types/type";
+import { FLOATING_BAR } from "@/constants/layout";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
 export default function DashboardScreen() {
     const { tasks, toggleTask, addTask } = useTaskStore();
     const [modalVisible, setModalVisible] = useState(false);
+
+    const insets = useSafeAreaInsets();
+
+    // Dynamic layout calculations reading from single source of truth
+    const tabBarBottomOffset = insets.bottom > 0 ? insets.bottom + 8 : 16;
+    const fabBottomPosition =
+        FLOATING_BAR.HEIGHT + tabBarBottomOffset + FLOATING_BAR.GAP_ABOVE_TAB;
+    const scrollPaddingBottom = fabBottomPosition + 80;
 
     const totalTasks = tasks.length;
     const completedTasks = tasks.filter((t) => t.completed).length;
@@ -30,7 +42,10 @@ export default function DashboardScreen() {
         <SafeAreaView className="flex-1 bg-background">
             <View className="flex-1">
                 <ScrollView
-                    contentContainerStyle={{ padding: 20, paddingBottom: 100 }}
+                    contentContainerStyle={{
+                        padding: 20,
+                        paddingBottom: scrollPaddingBottom,
+                    }}
                     className="flex-1"
                     showsVerticalScrollIndicator={false}
                 >
@@ -81,8 +96,15 @@ export default function DashboardScreen() {
                     </View>
                 </ScrollView>
 
-                {/* Floating Action Button (FAB) */}
-                <View className="absolute bottom-6 left-0 right-0 items-center px-5">
+                {/* Floating Action Button - PIXEL-PERFECT ALIGNMENT WITH TAB BAR */}
+                <View
+                    style={{
+                        bottom: fabBottomPosition,
+                        left: FLOATING_BAR.HORIZONTAL_MARGIN,
+                        right: FLOATING_BAR.HORIZONTAL_MARGIN,
+                    }}
+                    className="absolute"
+                >
                     <Pressable
                         onPress={() => setModalVisible(true)}
                         className="w-full flex-row items-center justify-center rounded-2xl bg-primary py-4 shadow-lg active:opacity-90"
